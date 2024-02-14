@@ -1,5 +1,7 @@
 # Vefforritun 2, 2024, verkefni 3: boltadeildar™️ vefþjónustur
 
+[Kynning í fyrirlestri](https://youtu.be/laL6P4hCnfQ).
+
 Verkefnið er framhald af verkefnum 1 og 2 og snýst um að útbúa vefþjónustur ofan á gögnin.
 
 ## Markmið
