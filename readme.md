@@ -1,4 +1,4 @@
-# Vefforritun 2, 2024, verkefni 3: kennsluskráar vefþjónustur
+# Vefforritun 2, 2024, verkefni 3: boltadeildar™️ vefþjónustur
 
 Verkefnið er framhald af verkefnum 1 og 2 og snýst um að útbúa vefþjónustur ofan á gögnin.
 
