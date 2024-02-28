@@ -117,7 +117,7 @@ Verkefni sett fyrir í fyrirlestri miðvikudaginn 14. febrúar 2024.
 
 ## Skil
 
-Skila skal í Canvas í seinasta lagi fyrir lok dags fimmtudaginn 7. mars 204.
+Skila skal í Canvas í seinasta lagi fyrir lok dags fimmtudaginn 7. mars 2024.
 
 Skil skulu innihalda:
 
