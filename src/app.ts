@@ -1,10 +1,12 @@
 import express from 'express';
-import { catchErrors } from './lib/catch-errors.js';
-import { router, bye, hello, error } from './routes/api.js';
+import { cors } from './lib/cors.js';
+import { router } from './routes/api.js';
 
 const app = express();
 
-app.get('/', catchErrors(hello), catchErrors(error), catchErrors(bye));
+app.use(express.json());
+
+app.use(cors);
 app.use(router);
 
 const port = 3000;

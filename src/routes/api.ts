@@ -1,22 +1,39 @@
-import express, { Request, Response, NextFunction } from 'express';
-import { sayHello } from '../lib/hello.js';
+import express, { Request, Response } from 'express';
+import {
+  createTeam,
+  deleteTeam,
+  getTeam,
+  listTeams,
+  updateTeam,
+} from './teams.js';
 
 export const router = express.Router();
 
-export async function hello(req: Request, res: Response, next: NextFunction) {
-  res.json({ hello: sayHello('world') });
-  next();
+export async function index(req: Request, res: Response) {
+  return res.json([
+    {
+      href: '/teams',
+      methods: ['GET', 'POST'],
+    },
+    {
+      href: '/teams/:slug',
+      methods: ['GET', 'PATCH', 'DELETE'],
+    },
+    {
+      href: '/games',
+      methods: ['GET', 'POST'],
+    },
+    {
+      href: '/games/:date',
+      methods: ['GET', 'PATCH', 'DELETE'],
+    },
+  ]);
 }
 
-export async function bye() {
-  console.log('done');
-}
+router.get('/', index);
 
-export async function error() {
-  throw new Error('error');
-}
-
-router.get('/test', hello, bye);
-
-// Mun crasha öllu
-router.get('/error', error);
+router.get('/teams', listTeams);
+router.post('/teams', createTeam);
+router.get('/teams/:slug', getTeam);
+router.patch('/teams/:slug', updateTeam);
+router.delete('/teams/:slug', deleteTeam);
