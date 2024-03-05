@@ -244,6 +244,50 @@ export class Database {
   }
 
   /**
+   * Get a game from the database.
+   */
+  async getGame(id: string): Promise<Game | null> {
+    const q = `
+      SELECT
+        games.id as id,
+        date,
+        home_team.name AS home_name,
+        home_score,
+        away_team.name AS away_name,
+        away_score
+      FROM
+        games
+      LEFT JOIN
+        teams AS home_team ON home_team.id = games.home
+      LEFT JOIN
+        teams AS away_team ON away_team.id = games.away
+      WHERE
+        games.id = $1
+    `;
+
+    const result = await this.query(q, [id]);
+
+    if (result && result.rows.length === 1) {
+      const row = result.rows[0];
+      const game: Game = {
+        id: row.id,
+        date: row.date,
+        home: {
+          name: row.home_name,
+          score: row.home_score,
+        },
+        away: {
+          name: row.away_name,
+          score: row.away_score,
+        },
+      };
+      return game;
+    }
+
+    return null;
+  }
+
+  /**
    * Insert a team into the database.
    * @param team Team to insert.
    */
@@ -288,12 +332,13 @@ export class Database {
   /**
    * Insert a game into the database.
    */
-  async insertGame(game: DatabaseGame): Promise<boolean> {
+  async insertGame(game: Omit<DatabaseGame, 'id'>): Promise<Game | null> {
     const q = `
       INSERT INTO
         games (date, home, away, home_score, away_score)
       VALUES
         ($1, $2, $3, $4, $5)
+      RETURNING id
     `;
 
     const result = await this.query(q, [
@@ -306,9 +351,9 @@ export class Database {
 
     if (!result || result.rowCount !== 1) {
       this.logger.warn('unable to insert game', { result, game });
-      return false;
+      return null;
     }
-    return true;
+    return this.getGame(result.rows[0].id);
   }
 
   /**

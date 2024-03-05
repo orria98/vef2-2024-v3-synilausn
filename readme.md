@@ -4,5 +4,9 @@
 
 ## TODO
 
+Heldur hraðsoðin sýnilausn byggð á v2, vantar:
+
 - [ ] Setja upp test með TypeScript
+- [ ] Betra mapping til að tryggja að gögn séu rétt
+- [ ] `PATCH` á leik
 - [ ] Types á rows úr pg

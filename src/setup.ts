@@ -11,8 +11,6 @@ const DROP_SCHEMA_FILE = './sql/drop.sql';
 const INSERT_FILE = './sql/insert.sql';
 const INPUT_DIR = './data';
 
-console.log('hi');
-
 async function setupDbFromFiles(
   db: Database,
   logger: ILogger,

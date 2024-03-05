@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { createGame, deleteGame, getGame, listGames } from './games.js';
 import {
   createTeam,
   deleteTeam,
@@ -37,3 +38,9 @@ router.post('/teams', createTeam);
 router.get('/teams/:slug', getTeam);
 router.patch('/teams/:slug', updateTeam);
 router.delete('/teams/:slug', deleteTeam);
+
+router.get('/games', listGames);
+router.post('/games', createGame);
+router.get('/games/:id', getGame);
+router.delete('/games/:id', deleteGame);
+// router.patch('/games/:id', updateGame);

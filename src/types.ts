@@ -25,6 +25,7 @@ export type Game = {
 };
 
 export type DatabaseGame = {
+  id: string;
   date: string;
   home_id: string;
   away_id: string;

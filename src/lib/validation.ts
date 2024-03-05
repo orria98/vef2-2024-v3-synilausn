@@ -30,7 +30,7 @@ export function createGameValidationMiddleware() {
     }),
     body('away').custom(async (value) => {
       const teams = (await getDatabase()?.getTeams()) ?? [];
-      console.log(value, teams);
+
       if (!teams.find((t) => t.id.toString() === value)) {
         throw new Error('Útilið verður að vera gilt');
       }
