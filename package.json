@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node --loader ts-node/esm ./src/app.ts",
-    "setup": "cross-env NODE_OPTIONS='--experimental-vm-modules' NODE_NO_WARNINGS=1 node --loader ts-node/esm ./src/setup.ts",
+    "setup": "NODE_OPTIONS='--experimental-vm-modules' NODE_NO_WARNINGS=1 node --loader ts-node/esm ./src/setup.ts",
     "lint": "eslint ./src"
   },
   "keywords": [],
@@ -22,7 +22,6 @@
     "passport-local": "^1.0.0",
     "pg": "^8.11.3",
     "slugify": "^1.6.6",
-    "ts-node": "^10.9.2",
     "xss": "^1.0.15"
   },
   "devDependencies": {
@@ -31,6 +30,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "typescript-eslint": "^7.1.0"
   }

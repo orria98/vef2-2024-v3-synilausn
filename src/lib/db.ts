@@ -96,16 +96,16 @@ export class Database {
     }
   }
 
-  async getTeam(slug: string): Promise<DatabaseTeam | null> {
-    const q = 'SELECT id, name, description FROM teams WHERE slug = $1';
-    const result = await this.query(q, [slug]);
+  async getTeam(id: string): Promise<DatabaseTeam | null> {
+    const q = 'SELECT id, name, description FROM teams WHERE id = $1';
+    const result = await this.query(q, [id]);
 
     if (result && result.rows.length === 1) {
       const row = result.rows[0];
       const team: DatabaseTeam = {
-        id: row.id,
+        id: id,
         name: row.name,
-        slug: slug,
+        slug: row.slug,
         description: row.description,
       };
       return team;
@@ -139,13 +139,21 @@ export class Database {
     return null;
   }
 
-  async deleteTeam(slug: string): Promise<boolean> {
-    const result = await this.query('DELETE FROM teams WHERE slug = $1', [
-      slug,
+  async deleteTeam(id: string): Promise<boolean> {
+    const gamesResult = await this.query('SELECT * FROM games WHERE home = $1 OR away = $1', [id]);
+    
+
+    if (gamesResult && gamesResult.rows.length > 0) {
+      
+      await this.query('DELETE FROM games WHERE home = $1 OR away = $1', [id]);
+      
+    }
+    const result = await this.query('DELETE FROM teams WHERE id = $1', [
+      id,
     ]);
 
     if (!result || result.rowCount !== 1) {
-      this.logger.warn('unable to delete team', { result, slug });
+      this.logger.warn('unable to delete team', { result, id });
       return false;
     }
     return true;
