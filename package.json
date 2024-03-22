@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node --loader ts-node/esm ./src/app.ts",
-    "setup": "NODE_OPTIONS='--experimental-vm-modules' NODE_NO_WARNINGS=1 node --loader ts-node/esm ./src/setup.ts",
+    "setup": "npm install ts-node && NODE_OPTIONS='--experimental-vm-modules' NODE_NO_WARNINGS=1 node --loader ts-node/esm ./src/setup.ts",
     "lint": "eslint ./src"
   },
   "keywords": [],
